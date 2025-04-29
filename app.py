@@ -1,179 +1,73 @@
-'''import streamlit as st
-import pandas as pd
-from sqlalchemy import create_engine, text
-from urllib.parse import quote_plus
-import os
-
-# ────────────────────── DATABASE CONNECTION ──────────────────────
-DB_USER = os.getenv("DB_USER", "postgres")
-DB_PASS = os.getenv("DB_PASS", "Sathwickkiran@12")
-DB_HOST = os.getenv("DB_HOST", "127.0.0.1")
-DB_PORT = os.getenv("DB_PORT", "5432")
-DB_NAME = os.getenv("DB_NAME", "music_test")
-ENCODED_PASS = quote_plus(DB_PASS)
-DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{ENCODED_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-engine = create_engine(DATABASE_URL)
-
-# ────────────────────── PAGE CONFIG ──────────────────────
-st.set_page_config(
-    page_title="🎵 Music Store Dashboard",
-    page_icon="🎶",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
-
-# ────────────────────── HELPERS ──────────────────────
-def run_query(q, return_df=True):
-    with engine.connect() as conn:
-        result = conn.execute(text(q))
-        if return_df:
-            return pd.DataFrame(result.fetchall(), columns=result.keys())
-
-# ────────────────────── SIDEBAR ──────────────────────
-st.sidebar.markdown("<h1 style='color:#ffffff;'>🎧 Music Store</h1>", unsafe_allow_html=True)
-section = st.sidebar.radio("Navigation", [
-    "🏠 Home",
-    "🎶 Tracks",
-    "👥 Customers",
-    "📀 Genres & Media",
-    "💸 Sales",
-    "🛠️ Admin"
-])
-
-# ────────────────────── HOMEPAGE ──────────────────────
-if section == "🏠 Home":
-    st.markdown("""
-        <style>
-        .hero {
-            text-align: center;
-            padding: 3rem 2rem 1rem;
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            color: white;
-            border-radius: 10px;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            font-weight: 300;
-        }
-        .features {
-            display: flex;
-            justify-content: space-around;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        .feature-card {
-            flex: 1;
-            min-width: 250px;
-            background-color: #f5f5f5;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        .feature-card h3 {
-            margin-top: 0.5rem;
-            font-size: 1.3rem;
-        }
-        .feature-card p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        .cta {
-            text-align: center;
-            margin: 3rem 0;
-        }
-        .cta a {
-            font-size: 1.1rem;
-            background-color: #2563eb;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-        .cta a:hover {
-            background-color: #1d4ed8;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-        <div class='hero'>
-            <h1>🎵 Welcome to the Music Store Dashboard</h1>
-            <p>Browse tracks, explore customers and invoices, analyze pricing — all in one place.</p>
-        </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-        <div class='features'>
-            <div class='feature-card'>
-                <h3>🎼 Track Explorer</h3>
-                <p>Browse our full catalog of 3,500+ tracks. Filter by name, duration, or genre to find the right sound.</p>
-            </div>
-            <div class='feature-card'>
-                <h3>🧾 Customer Billing</h3>
-                <p>Analyze customer billing data, view locations, and manage user records through a simplified view.</p>
-            </div>
-            <div class='feature-card'>
-                <h3>📊 Insights & Reports</h3>
-                <p>Visualize top spenders, monitor total invoices, and break down genre/media type distributions.</p>
-            </div>
-            <div class='feature-card'>
-                <h3>🛠️ Admin Controls</h3>
-                <p>Add or remove customer data directly from the dashboard using secure operations.</p>
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-        <div class='cta'>
-            <a href="/" target="_self">🎧 Explore Tracks Now</a>
-        </div>
-    """, unsafe_allow_html=True)
-
-# You can keep the other sections (Tracks, Customers, etc.) the same.
-# Just plug this in place of your "🏠 Home" section and you're set!
-'''
-
 # app.py
 
+# import streamlit as st
+# from utils.db import run_query, load_query
+# from dotenv import load_dotenv
+# import os
+
+# # Load environment variables
+# load_dotenv()
+
+# # App Title and Config
+# st.set_page_config(
+#     page_title="🎵 Music Store Dashboard",
+#     page_icon="🎶",
+#     layout="wide",
+#     initial_sidebar_state="expanded",
+# )
+
+# st.title("🎵 Music Store Database Explorer (Local PostgreSQL)")
+
+# # List of available queries
+# SQL = {
+#     "👥 Customers and Their Cities": "Customers_and_their_cities.sql",
+#     "🌎 Most Diverse Customers Based on Genre": "most_diverse_customers_based_on_genre.sql",
+#     "🎵 Number of Tracks per Genre": "number_of_tracks_per_genre.sql",
+#     "⏳ Top 5 Longest Tracks": "top_5_longest_tracks.sql",
+#     "💰 Top Artists by Revenue Generated": "top_artists_by_revenue_generated.sql"
+# }
+
+# # Dropdown menu
+# selected_query = st.selectbox("📄 Select a SQL Query to Explore", list(SQL.keys()))
+
+# try:
+#     # Load and run the selected query
+#     df = run_query(SQL[selected_query])
+
+#     st.subheader("🧹 SQL Query Used")
+#     query_text = load_query(SQL[selected_query])
+#     st.code(query_text, language="sql")
+
+#     st.subheader("📊 Query Results")
+#     st.dataframe(df)
+
+# except Exception as e:
+#     st.error(f"❌ Failed to execute query: {e}")
+
+
+# --- app.py ---
+
 import streamlit as st
-from utils.db import run_query, load_query
-from dotenv import load_dotenv
-import os
+from utils.db import run_query_from_file, run_query_direct, load_query
 
-# Load environment variables
-load_dotenv()
-
-# App Title and Config
-st.set_page_config(
-    page_title="🎵 Music Store Dashboard",
-    page_icon="🎶",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
-
-st.title("🎵 Music Store Database Explorer (Local PostgreSQL)")
+# App title
+st.title("🛫 Airports Data Explorer (Local Database)")
 
 # List of available queries
 SQL = {
-    "👥 Customers and Their Cities": "Customers_and_their_cities.sql",
-    "🌎 Most Diverse Customers Based on Genre": "most_diverse_customers_based_on_genre.sql",
-    "🎵 Number of Tracks per Genre": "number_of_tracks_per_genre.sql",
-    "⏳ Top 5 Longest Tracks": "top_5_longest_tracks.sql",
-    "💰 Top Artists by Revenue Generated": "top_artists_by_revenue_generated.sql"
+    "Classified Details of Large Airports": "classifed_details_of_large_airports.sql",
+    "Combining Country Codes of Two Tables": "combing_country_codes_of_two_tables.sql",
+    "Countries Having More Than 100 Airports": "countries_having_more_than_100_airports.sql",
+    "Pairing Different Airports of Same Country": "pairing_different_airports_of_same_country.sql",
+    "Joining Airports with Country Continent": "joins_airports_with_country_continent.sql"
 }
 
-# Dropdown menu
-selected_query = st.selectbox("📄 Select a SQL Query to Explore", list(SQL.keys()))
+# --- Dropdown menu for pre-defined queries ---
+st.header("Select a Predefined Query")
+selected_query = st.selectbox("📄 Choose a Query", list(SQL.keys()))
 
 try:
-    # Load and run the selected query
-    df = run_query(SQL[selected_query])
+    df = run_query_from_file(SQL[selected_query])
 
     st.subheader("🧹 SQL Query Used")
     query_text = load_query(SQL[selected_query])
@@ -183,4 +77,22 @@ try:
     st.dataframe(df)
 
 except Exception as e:
-    st.error(f"❌ Failed to execute query: {e}")
+    st.error(f"❌ Failed to execute pre-defined query: {e}")
+
+# --- Custom query execution ---
+st.header("Write Your Own SQL Query")
+custom_query = st.text_area("✏️ Enter your SQL query below:", height=200)
+
+if st.button("🚀 Run Custom Query"):
+    if custom_query.strip() == "":
+        st.warning("⚠️ Please enter a SQL query.")
+    else:
+        try:
+            df_custom = run_query_direct(custom_query)
+            if df_custom:
+                st.success("✅ Query executed successfully!")
+                st.dataframe(df_custom)
+            else:
+                st.info("ℹ️ Query executed but returned no results.")
+        except Exception as e:
+            st.error(f"❌ Failed to execute custom query: {e}")
