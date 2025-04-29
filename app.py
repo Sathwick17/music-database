@@ -55,11 +55,11 @@ st.title("🛫 Airports Data Explorer (Local Database)")
 
 # List of available queries
 SQL = {
-    "Classified Details of Large Airports": "classifed_details_of_large_airports.sql",
-    "Combining Country Codes of Two Tables": "combing_country_codes_of_two_tables.sql",
-    "Countries Having More Than 100 Airports": "countries_having_more_than_100_airports.sql",
-    "Pairing Different Airports of Same Country": "pairing_different_airports_of_same_country.sql",
-    "Joining Airports with Country Continent": "joins_airports_with_country_continent.sql"
+    "👥 Customers and Their Cities": "Customers_and_their_cities.sql",
+    "🌎 Most Diverse Customers Based on Genre": "most_diverse_customers_based_on_genre.sql",
+    "🎵 Number of Tracks per Genre": "number_of_tracks_per_genre.sql",
+    "⏳ Top 5 Longest Tracks": "top_5_longest_tracks.sql",
+    "💰 Top Artists by Revenue Generated": "top_artists_by_revenue_generated.sql"
 }
 
 # --- Dropdown menu for pre-defined queries ---
