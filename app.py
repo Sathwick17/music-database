@@ -51,7 +51,7 @@ import streamlit as st
 from utils.db import run_query_from_file, run_query_direct, load_query
 
 # App title
-st.title("🛫 Airports Data Explorer (Local Database)")
+st.title("🎵 Music Store Database Explorer (Local PostgreSQL)")
 
 # List of available queries
 SQL = {
