@@ -35,7 +35,7 @@
 
 
 # --- utils/db.py ---
-
+import streamlit as st
 import psycopg2
 import psycopg2.extras
 import os
